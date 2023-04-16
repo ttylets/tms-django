@@ -32,12 +32,8 @@ def vote(request, question_id: int):
 
 def results(request, question_id: int):
     question = get_object_or_404(Question, id=question_id)
-    context = {'question' : question}
+    context = {'question': question}
     return render(request, 'polls/results.html', context)
-
-
-
-
 
 
 
