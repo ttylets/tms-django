@@ -17,10 +17,11 @@ def detail(request, article_id: int):
 
 
 def like(request, article_id: int):
-    article = get_object_or_404(Article, id=article_id)
+    assert request.method == 'POST'
     article_id = request.POST['article_id']
+    article = get_object_or_404(Article, id=article_id)
     article.likes += 1
     article.save()
-    return redirect('articles:detail', article_id)
+    return redirect('articles:detail', article.id)
 
 
