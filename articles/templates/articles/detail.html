@@ -1,15 +1,13 @@
-{% extends 'articles/base.html'%}
+{% extends 'articles/base.html' %}
 
-
-{%block body%}
-    <h1>{{article.title}}</h1>
-    <h3>Author: {{article.author}}</h3>
-    <p>{{article.text}}</p>
-    <p>Likes: {{article.like_count}}</p>
-    <form method = "post" action="{% url 'articles:like' %}">
+{% block body %}
+    <h1>{{ article.title }}</h1>
+    <i>{{ article.author }}</i>
+    <p>{{ article.text }}</p>
+    <p><strong>Likes: {{ article.likes }}</strong></p>
+    <form method="post" action="{% url 'articles:like' %}">
         {% csrf_token %}
-        <input type = "hidden" name = article_id" value="{{article.id}}/>
-        <input type = "submit" value="Like"/>
+        <input type="hidden" name="article_id" value="{{ article.id }}"/>
+        <input type="submit" value="Like"/>
     </form>
-    {% endblock %}
-
+{% endblock %}
