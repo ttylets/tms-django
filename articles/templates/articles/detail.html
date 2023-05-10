@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>{{ article.title }}</h1>
-    <i>{{ article.author }}</i>
+    <li><a href ="{% url 'articles:author' author_id %}">{{author.last_name}}{{author.first_name}}</a></li>
     <p>{{ article.text }}</p>
     <p><strong>Likes: {{ article.likes }}</strong></p>
     <form method="post" action="{% url 'articles:like' %}">
