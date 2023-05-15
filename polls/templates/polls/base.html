@@ -4,6 +4,15 @@
     <title>{% block title %}Polls App{% endblock %}</title>
 </head>
 <body>
-  {% block body %}{%endblock%}
+    <a>href ="{%url 'polls:index'%}</a>
+    {% if user.is_authenticated %}
+        <form action ="{% url 'logout' %}?next={{request.path}}" method = "post">
+            {% csrf_token %}
+            <input type = 'submit' value="Logout" class="btn btn-danger"/>
+        </form>
+    {% else %}
+        <a href="{%url 'login' %}?next={{request.path}}" class="btn btn-info">Login</a>
+    {% endif %}
+    {% block body %}{%endblock%}
 </body>
 </html>
