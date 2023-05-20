@@ -1,26 +1,21 @@
-<html>
-<head>
-    <title>Shop APP</title>
-</head>
-<body>
-    <h1>Products:</h1>
-         <li>{{shop.category}
-    <ul>
-      <li>Купить молоко</li>
-      <li>Купить хлеб</li>
-    </ul>
-  </li>
-</body>
-</html>
+<{% extends 'shop/base.html' %}
 
-
-<!--        <h1><a href="/products">Go to all products page</a></h1>-->
-<!--        <h1><a href="/favorite-products">Go to favorite products page</a></h1>-->
-<!--        <h1>{product_name} </h1>-->
-<!--        <h2>Category: {product.category}</h2>-->
-<!--        <p>{product.description}</p>-->
-<!--        <form action="/product/{product.id}/star" method="post">-->
-<!--            <input type="Submit" value="{star_button_title}"/>-->
-<!--        </form>-->
-<!--    </body>-->
-<!--    </html>-->
+{% block body %}
+    {% if not categories %}
+        <h1>There are no categories</h1>
+    {% else %}
+        <h1>Main page</h1>
+        <ul>
+            {% for category in categories %}
+                <li>
+                    <a href="{% url 'shop:category_detail' category.id %}">{{ category.name }}</a>
+                    <ul>
+                        {% for product in category.products.all %}
+                            <li><a href="{% url 'shop:product_detail' product.id %}">{{ product.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

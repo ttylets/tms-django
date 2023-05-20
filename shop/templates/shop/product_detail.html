@@ -1,0 +1,11 @@
+{% extends 'shop/base.html' %}
+
+{% block body %}
+    <h1>{{ product.name }} - {{ product.price }}$</h1>
+    <p>{{ product.description }}</p>
+    <p>Category:
+        <a href="{% url 'shop:category_detail' product.category.id %}">
+            {{ product.category.name }}
+        </a>
+    </p>
+{% endblock %}
