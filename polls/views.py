@@ -1,7 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpRequest, Http404
-
+from django.db.models import signals
 from .models import Question, Choice
+
+
+def loging_callback(**kwargs):
+    print(f"Log^ {kwargs}")
+
+
+signals.pre_init.connect(loging_callback)
+signals.post_init.connect(loging_callback)
 
 
 def index(request: HttpRequest):
