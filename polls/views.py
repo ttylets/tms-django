@@ -4,14 +4,6 @@ from django.db.models import signals
 from .models import Question, Choice
 
 
-def loging_callback(**kwargs):
-    print(f"Log^ {kwargs}")
-
-
-signals.pre_init.connect(loging_callback)
-signals.post_init.connect(loging_callback)
-
-
 def index(request: HttpRequest):
     questions = Question.objects.order_by('-pub_date')[:10]
     context = {'latest_question_list': questions}

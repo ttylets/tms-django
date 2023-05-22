@@ -8,4 +8,10 @@
             {{ product.category.name }}
         </a>
     </p>
+    {% if user.is_authenticated %}
+        <form action="{% url 'shop:add_to_cart' %}" method="post">
+             {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{product.id}}">
+            <input type = "submit" value = "Add to cart" class="btn btn-info">
+    {% endif %}
 {% endblock %}

@@ -15,7 +15,7 @@
             <input type = 'submit' value="Logout" class="btn btn-danger"/>
         </form>
     {% else %}
-        <a> href="{%url 'login' %}?next={{request.path}}" class="btn btn-info">Login</a>
+        <a href="{%url 'login' %}?next={{request.path}}" class="btn btn-info">Login</a>
     {% endif %}
     {% block body %}{%endblock%}
 </body>
