@@ -15,7 +15,7 @@ def index(request: HttpRequest):
 @job
 def number_of_views(question: Question):
     question.view_count = F("view_count")+1
-    question.save()
+    question.save(update_fields=['view_count'])
 
 
 def detail(request, question_id: int):
