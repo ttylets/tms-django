@@ -27,8 +27,6 @@ class Profile(models.Model):
                                       related_name='+', null=True, blank=True)
 
 
-
-
 class Order(models.Model):
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='orders')
     status = models.CharField(max_length=20, default='INITIAL')

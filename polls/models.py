@@ -6,6 +6,7 @@ from django.contrib import admin
 class Question (models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published', db_index=True)
+    view_count = models.IntegerField(default=0)
 
     @admin.display(
         boolean=True,

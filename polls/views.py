@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpRequest, Http404
 from django.db.models import signals
 from .models import Question, Choice
+from django_rq import job
+from django.db.models import F
 
 
 def index(request: HttpRequest):
@@ -10,8 +12,15 @@ def index(request: HttpRequest):
     return render(request, 'polls/index.html', context)
 
 
+@job
+def number_of_views(question: Question):
+    question.view_count = F("view_count")+1
+    question.save()
+
+
 def detail(request, question_id: int):
     question = get_object_or_404(Question, id=question_id)
+    number_of_views.delay(question)
     context = {'question': question}
     return render(request, 'polls/detail.html', context)
 
@@ -36,6 +45,8 @@ def results(request, question_id: int):
     return render(request, 'polls/results.html', context)
 
 
+def my_view(request):
+    number_of_views.delay()
 
 
 
